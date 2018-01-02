@@ -8,7 +8,7 @@ from keras.optimizers import Adam
 from sklearn.model_selection import train_test_split
 from keras.preprocessing.image import img_to_array
 from keras.utils import to_categorical
-from the_rock_recognizer.lenet import LeNet
+from dwayne_detector_lenet.lenet import LeNet
 from imutils import paths
 import matplotlib.pyplot as plt
 import numpy as np
@@ -29,7 +29,7 @@ args = vars(ap.parse_args())
 
 # initialize the number of epochs to train for, initia learning rate,
 # and batch size
-EPOCHS = 25
+EPOCHS = 50
 INIT_LR = 1e-3
 BS = 32
 
@@ -54,7 +54,7 @@ for imagePath in imagePaths:
 	# extract the class label from the image path and update the
 	# labels list
 	label = imagePath.split(os.path.sep)[-2]
-	label = 1 if label == "rock" else 0
+	label = 1 if label == "dwayne" else 0
 	labels.append(label)
 
 # scale the raw pixel intensities to the range [0, 1]
@@ -100,7 +100,7 @@ plt.plot(np.arange(0, N), H.history["loss"], label="train_loss")
 plt.plot(np.arange(0, N), H.history["val_loss"], label="val_loss")
 plt.plot(np.arange(0, N), H.history["acc"], label="train_acc")
 plt.plot(np.arange(0, N), H.history["val_acc"], label="val_acc")
-plt.title("Training Loss and Accuracy on The Rock/Not The Rock")
+plt.title("Training Loss and Accuracy on Dwayne/Not Dwayne")
 plt.xlabel("Epoch #")
 plt.ylabel("Loss/Accuracy")
 plt.legend(loc="lower left")
