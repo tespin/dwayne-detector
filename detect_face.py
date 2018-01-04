@@ -24,7 +24,7 @@ gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 rects = detector(gray, 1)
 
-for rect in rects:
+for (index, rect) in enumerate(rects):
     shape = predictor(gray, rect)
     shape = shape_to_numpy(shape)
 
@@ -37,6 +37,9 @@ for rect in rects:
     for (x, y) in shape:
         cv2.circle(image, (x, y), 1, (0, 0, 255), -1)
 
+    cv2.imwrite("images/dwayne/00000{}.jpg".format(index), roiAligned)
+
+print(type(rects))
 cv2.imshow("Output", image)
 cv2.imshow("ROI", roi)
 cv2.imshow("Aligned", roiAligned)
