@@ -2,6 +2,7 @@ from collections import OrderedDict
 import numpy as np
 import cv2
 import sys
+import os
 
 FACIAL_LANDMARKS_INDEXES = OrderedDict([
     ("mouth", (48, 68)),
@@ -12,6 +13,21 @@ FACIAL_LANDMARKS_INDEXES = OrderedDict([
     ("nose", (27, 36)),
     ("jaw", (0, 17))
 ])
+
+def list_files(basePath, validExtensions=(".jpg", ".jpeg", ".png", ".bmp"), contains=None):
+    for (root, directory, filenames) in os.walk(basePath):
+        for filename in filenames:
+            if contains is not None and filename.find(contains) == -1:
+                continue
+
+            extension = filename[filename.rfind("."):].lower()
+
+            if extension.endswith(validExtensions):
+                imagePath = os.path.join(root, filename).replace(" ", "\\ ")
+                yield imagePath
+
+def list_images(basePath, contains=None):
+    return list_files(basePath, validExtensions=(".jpg", ".jpeg", ".png", ".bmp"), contains=contains)
 
 def resize(image, width=None, height=None, interpolation=cv2.INTER_AREA):
     dim = None
