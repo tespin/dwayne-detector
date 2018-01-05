@@ -22,8 +22,21 @@ aligner = FaceAligner(predictor, desiredFaceWidth=256)
 imagePaths = sorted(list(list_images(args["images"])))
 
 for (index, imagePath) in enumerate(imagePaths):
-    # load input image, resize, and convert to grayscale
+
+    #delete = False
+    #try:
     image = cv2.imread(imagePath)
+    #    if image is None:
+    #        delete = True
+
+    #except Exception as e:
+    #    print("[EXCEPTION] {}".format(e))
+    #    delete = True
+
+    #if delete:
+    #    print("[INFO] deleting {}...".format(imagePath))
+    #    os.remove(imagePath)
+
     image = resize(image, width=500)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -42,10 +55,9 @@ for (index, imagePath) in enumerate(imagePaths):
         for (x, y) in shape:
             cv2.circle(image, (x, y), 1, (0, 0, 255), -1)
 
-        cv2.imwrite("images/dwayne/00000{}.jpg".format(index), roiAligned)
+        cv2.imwrite("images/dwayne/{}.jpg".format(str(index).zfill(8)), roiAligned)
 
-print(type(rects))
-cv2.imshow("Output", image)
-cv2.imshow("ROI", roi)
-cv2.imshow("Aligned", roiAligned)
-cv2.waitKey(0)
+#cv2.imshow("Output", image)
+#cv2.imshow("ROI", roi)
+#cv2.imshow("Aligned", roiAligned)
+#cv2.waitKey(0)
