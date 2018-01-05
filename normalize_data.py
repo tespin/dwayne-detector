@@ -32,8 +32,11 @@ for (index, imagePath) in enumerate(imagePaths):
         shape = shape_to_numpy(shape)
 
         (x, y, w, h) = rect_to_bounding(rect)
+
+        # TODO: check bounds 
+
         roi = image[y:y + h, x:x + w].copy()
-        roiResized = resize(roi, width=256)
         roiAligned = aligner.align(image, gray, rect)
+        roiAligned = resize(roiAligned, width=256)
 
         cv2.imwrite("images/dwayne/{}.jpg".format(str(index).zfill(8)), roiAligned)
