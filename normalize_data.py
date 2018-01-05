@@ -5,6 +5,7 @@ from process import shape_to_numpy
 from process import rect_to_bounding
 from process import list_images
 from face_aligner import FaceAligner
+import dlib
 import cv2
 
 ap = argparse.ArgumentParser()
