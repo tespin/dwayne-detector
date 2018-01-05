@@ -25,3 +25,12 @@ for (index, imagePath) in enumerate(imagePaths):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     rects = detector(gray, 1)
+
+    for rect in rects:
+        shape = predictor(gray, rect)
+        shape = shape_to_numpy(shape)
+
+        (x, y, w, h) = rect_to_bounding(rect)
+        roi = image[y:y + h, x:x + w].copy()
+        roiResized = resize(roi, width=256)
+        roiAligned = aligner.align(image, gray, rect)
