@@ -34,3 +34,5 @@ for (index, imagePath) in enumerate(imagePaths):
         roi = image[y:y + h, x:x + w].copy()
         roiResized = resize(roi, width=256)
         roiAligned = aligner.align(image, gray, rect)
+
+        cv2.imwrite("images/dwayne/{}.jpg".format(str(index).zfill(8)), roiAligned)
