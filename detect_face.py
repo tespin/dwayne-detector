@@ -30,8 +30,10 @@ if len(rects) is 0:
 
 else:
     numFaces = "faces" if len(rects) > 1 else "face"
-
     print("Found {} {}!".format(len(rects), numFaces))
+
+    rois = []
+
     for rect in rects:
         shape = predictor(gray, rect)
         shape = shape_to_numpy(shape)
@@ -48,13 +50,18 @@ else:
         elif x > x + w:
             x = x + w   
 
-        roi = image[y:y + h, x:x + w]
-        roiResized = resize(roi, width=256)
+        roi = image[y + 1:y + h, x + 1:x + w]
+        
         cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 1)
 
         for (x, y) in shape:
-            cv2.circle(image, (x, y), 1, (0, 0, 255), -1)
+            cv2.circle(image, (x, y), 1, (0, 0, 255), -1)  
+  
+        roi = resize(roi, width=256)
+        rois.append(roi)
 
-    cv2.imshow("ROI", roiResized)
+    for index, region in enumerate(rois):
+        cv2.imshow("Face {}".format(index + 1), rois[index])
+ 
     cv2.imshow("Output", image)
     cv2.waitKey(0)
