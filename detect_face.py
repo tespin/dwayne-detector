@@ -20,7 +20,6 @@ image = cv2.imread(args["image"])
 
 image = resize(image, width=500)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-roiResized = gray.copy()
 
 rects = detector(gray, 1)
 
@@ -61,7 +60,7 @@ else:
         rois.append(roi)
 
     for index, region in enumerate(rois):
-        cv2.imshow("Face {}".format(index + 1), rois[index])
+        cv2.imshow("Face {}".format(index + 1), region)
  
     cv2.imshow("Output", image)
     cv2.waitKey(0)
