@@ -35,6 +35,16 @@ for (index, imagePath) in enumerate(imagePaths):
 
         # TODO: check bounds 
 
+        if y < 0:
+            y = 0
+        elif y > y + h:
+            y = y + h
+
+        if x < 0:
+            x = 0
+        elif x > x + w:
+            x = x + w
+
         roi = image[y:y + h, x:x + w].copy()
         roiAligned = aligner.align(image, gray, rect)
         roiAligned = resize(roiAligned, width=256)
