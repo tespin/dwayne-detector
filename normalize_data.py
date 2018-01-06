@@ -27,6 +27,8 @@ for (index, imagePath) in enumerate(imagePaths):
 
     rects = detector(gray, 1)
 
+    # TODO: Accomodate multiple faces. Debug if Dwayne isn't the detected face.
+
     if len(rects) is 0:
         print("[INFO] No faces found in image {}! Skipping...".format(imagePath))
         continue
