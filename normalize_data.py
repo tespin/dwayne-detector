@@ -27,26 +27,32 @@ for (index, imagePath) in enumerate(imagePaths):
 
     rects = detector(gray, 1)
 
-    for rect in rects:
-        shape = predictor(gray, rect)
-        shape = shape_to_numpy(shape)
+    if len(rects) is 0:
+        print("[INFO] No faces found in image {}! Skipping...".format(imagePath))
+        continue
+    elif len(rects) is 1:
+        for rect in rects:
+            shape = predictor(gray, rect)
+            shape = shape_to_numpy(shape)
 
-        (x, y, w, h) = rect_to_bounding(rect)
+            (x, y, w, h) = rect_to_bounding(rect)
 
-        # TODO: check bounds 
+            # TODO: check bounds 
 
-        if y < 0:
-            y = 0
-        elif y > y + h:
-            y = y + h
+            if y < 0:
+                y = 0
+            elif y > y + h:
+                y = y + h
 
-        if x < 0:
-            x = 0
-        elif x > x + w:
-            x = x + w
+            if x < 0:
+                x = 0
+            elif x > x + w:
+                x = x + w
 
-        roi = image[y:y + h, x:x + w].copy()
-        roiAligned = aligner.align(image, gray, rect)
-        roiAligned = resize(roiAligned, width=256)
+            roi = image[y:y + h, x:x + w].copy()
+            roiAligned = aligner.align(image, gray, rect)
+            roiAligned = resize(roiAligned, width=256)
 
-        cv2.imwrite("images/dwayne/{}.jpg".format(str(index).zfill(8)), roiAligned)
+            cv2.imwrite("images/dwayne/{}.jpg".format(str(index).zfill(8)), roiAligned)
+
+        print("[INFO]Normalized image {}...".format(imagePath))
