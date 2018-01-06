@@ -20,32 +20,39 @@ image = cv2.imread(args["image"])
 
 image = resize(image, width=500)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+roiResized = gray.copy()
 
 rects = detector(gray, 1)
 
-for rect in rects:
-    shape = predictor(gray, rect)
-    shape = shape_to_numpy(shape)
+if len(rects) is 0:
+    print("[INFO]: No faces found! Exiting...")
+    exit()
 
-    (x, y, w, h) = rect_to_bounding(rect)
+elif len(rects) is 1:
+    print("Found Dwayne!")
+    for rect in rects:
+        shape = predictor(gray, rect)
+        shape = shape_to_numpy(shape)
 
-    if y < 0:
-        y = 0
-    elif y > y + h:
-        y = y + h
+        (x, y, w, h) = rect_to_bounding(rect)
+
+        if y < 0:
+            y = 0
+        elif y > y + h:
+            y = y + h
  
-    if x < 0:
-        x = 0
-    elif x > x + w:
-        x = x + w   
+        if x < 0:
+            x = 0
+        elif x > x + w:
+            x = x + w   
 
-    roi = image[y:y + h, x:x + w]
-    roiResized = resize(roi, width=256)
-    cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 1)
+        roi = image[y:y + h, x:x + w]
+        roiResized = resize(roi, width=256)
+        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 1)
 
-    for (x, y) in shape:
-        cv2.circle(image, (x, y), 1, (0, 0, 255), -1)
+        for (x, y) in shape:
+            cv2.circle(image, (x, y), 1, (0, 0, 255), -1)
 
-cv2.imshow("ROI", roiResized)
-cv2.imshow("Output", image)
-cv2.waitKey(0)
+    cv2.imshow("ROI", roiResized)
+    cv2.imshow("Output", image)
+    cv2.waitKey(0)
