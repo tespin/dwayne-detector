@@ -6,6 +6,8 @@ from process import rect_to_bounding
 import dlib
 import cv2
 
+# TODO: poll video stream
+
 ap = argparse.ArgumentParser()
 ap.add_argument("-p", "--shape-predictor", required=True, help="path to facial landmark predictor")
 ap.add_argument("-i", "--image", required=True, help="path to input image")
