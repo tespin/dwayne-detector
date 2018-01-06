@@ -28,8 +28,10 @@ if len(rects) is 0:
     print("[INFO]: No faces found! Exiting...")
     exit()
 
-elif len(rects) is 1:
-    print("Found Dwayne!")
+else:
+    numFaces = "faces" if len(rects) > 1 else "face"
+
+    print("Found {} {}!".format(len(rects), numFaces))
     for rect in rects:
         shape = predictor(gray, rect)
         shape = shape_to_numpy(shape)
