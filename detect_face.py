@@ -10,11 +10,13 @@ import cv2
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-p", "--shape-predictor", required=True, help="path to facial landmark predictor")
+ap.add_argument("-r", "--recognition-model", required=True, help="path to facial recognition model")
 ap.add_argument("-i", "--image", required=True, help="path to input image")
 args = vars(ap.parse_args())
 
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(args["shape_predictor"])
+recognizer = dlib.face_recognition_model_v1(args["recognition_model"])
 
 image = cv2.imread(args["image"])
 
@@ -35,6 +37,10 @@ else:
 
     for rect in rects:
         shape = predictor(gray, rect)
+        #shape = shape_to_numpy(shape)
+
+        face_descriptor = recognizer.compute_face_descriptor(image, shape)
+        print("Face descriptor: {}".format(face_descriptor))
         shape = shape_to_numpy(shape)
 
         (x, y, w, h) = rect_to_bounding(rect)
