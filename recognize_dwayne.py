@@ -18,7 +18,8 @@ detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(args["shape_predictor"])
 recognizer = dlib.face_recognition_model_v1(args["recognition_model"])
 
-
+imDwayne = cv2.imread(args["dwayne"])
+imUnknown = cv2.imread(args["unknown"])
 
 # take two images as input
 # detect face
