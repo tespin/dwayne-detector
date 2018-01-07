@@ -14,12 +14,15 @@ ap.add_argument("-p", "--shape-predictor", required=True, help="path to facial l
 ap.add_argument("-r", "--recognition-model", required=True, help="path to facial recognition model")
 args = vars(ap.parse_args())
 
+images = []
+
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(args["shape_predictor"])
 recognizer = dlib.face_recognition_model_v1(args["recognition_model"])
 
 imDwayne = cv2.imread(args["dwayne"])
 imUnknown = cv2.imread(args["unknown"])
+images.extend([imDwayne, imUnknown])
 
 # take two images as input
 # detect face
