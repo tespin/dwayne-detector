@@ -24,6 +24,14 @@ imDwayne = cv2.imread(args["dwayne"])
 imUnknown = cv2.imread(args["unknown"])
 images.extend([imDwayne, imUnknown])
 
+encodings = []
+
+for image in images:
+    image = resize(image, width=500)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    
+    rects = detectory(gray, 1)
+
 # take two images as input
 # detect face
 # align face
