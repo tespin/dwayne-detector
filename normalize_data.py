@@ -32,7 +32,9 @@ for (index, imagePath) in enumerate(imagePaths):
     if len(rects) is 0:
         print("[INFO] No faces found in image {}! Skipping...".format(imagePath))
         continue
-    elif len(rects) is 1:
+    else:
+        rois = []
+
         for rect in rects:
             shape = predictor(gray, rect)
             shape = shape_to_numpy(shape)
@@ -54,7 +56,7 @@ for (index, imagePath) in enumerate(imagePaths):
             roi = image[y:y + h, x:x + w].copy()
             roiAligned = aligner.align(image, gray, rect)
             roiAligned = resize(roiAligned, width=256)
+            rois.append(roiAligned)
 
-            cv2.imwrite("images/dwayne/{}.jpg".format(str(index).zfill(8)), roiAligned)
-
+        cv2.imwrite("images/dwayne/{}.jpg".format(str(index).zfill(8)), rois[0])
         print("[INFO]Normalized image {}...".format(imagePath))
