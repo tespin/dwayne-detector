@@ -54,12 +54,14 @@ for path, image in images.items():
     else:
         rois = []
 
+        
+
         for rect in rects:
             shape = predictor(gray, rect)
 
             face_descriptor = recognizer.compute_face_descriptor(image, shape)
             encodings.extend(face_descriptor)
-            print("[INFO] Face descriptor for image {}.".format(os.path.basename(path)))
+#            print("[INFO] Face descriptor for image {}: {}".format(os.path.basename(path), face_descriptor ))
             shape = shape_to_numpy(shape)
 
             (x, y, w, h) = rect_to_bounding(rect)
@@ -75,28 +77,32 @@ for path, image in images.items():
                 x = x + w
 
             roi = image[y + 1:y + h, x + 1:x + w]
-            cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 1)
+#            cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 1)
             roiAligned = aligner.align(image, gray, rect)
             roiAligned = resize(roiAligned, width=256)
             rois.append(roiAligned)
 
-            for x, y in shape:
-                cv2.circle(image, (x, y), 1, (0, 0, 255), -1)
+#            for x, y in shape:
+#                cv2.circle(image, (x, y), 1, (0, 0, 255), -1)
 
             roi = resize(roi, width=256)
             rois.append(roi)
 
-        if encodings[0] - encodings[1] < 0.6:
-            print("Unknown image {} is Dwayne!".format(path))
+        print("[INFO] Encoding 1: {}, Encoding 2: {}".format(encodings[0], encodings[1]))
+
+        distance = encodings[0] - encodings[1]
+
+        if distance < 0.6:
+            print("Distance is: {}. Unknown image {} is Dwayne!".format(distance, os.path.basename(path)))
         else:
             print("That's not The Rock!")
 
-        for index, region in enumerate(rois):
-            cv2.imshow("Face {}".format(index + 1), region)
+#        for index, region in enumerate(rois):
+#            cv2.imshow("Face {}".format(index + 1), region)
 
-cv2.imshow("Dwayne The Rock Johnson", imDwayne)
-cv2.imshow("Unknown person", imUnknown)
-cv2.waitKey(0)
+#cv2.imshow("Dwayne The Rock Johnson", imDwayne)
+#cv2.imshow("Unknown person", imUnknown)
+#cv2.waitKey(0)
 
 #for index, image in enumerate(images):
 #    image = resize(image, width=500)
