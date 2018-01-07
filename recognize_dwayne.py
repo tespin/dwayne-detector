@@ -23,8 +23,11 @@ predictor = dlib.shape_predictor(args["shape_predictor"])
 recognizer = dlib.face_recognition_model_v1(args["recognition_model"])
 aligner = FaceAligner(predictor, desiredFaceWidth=256)
 
-imDwaynePath = os.path.basename(args["dwayne"])
-imUnknownPath = os.path.basename(args["unknown"])
+#imDwaynePath = os.path.basename(args["dwayne"])
+#imUnknownPath = os.path.basename(args["unknown"])
+
+imDwaynePath = str(args["dwayne"])
+imUnknownPath = str(args["unknown"])
 
 #imDwayne = cv2.imread(args["dwayne"])
 #imUnknown = cv2.imread(args["unknown"])
@@ -37,6 +40,8 @@ images = {imDwaynePath: imDwayne, imUnknownPath: imUnknown}
 
 encodings = []
 
+cv2.imshow("Dwayne", imDwayne)
+
 for path, image in images.items():
     image = resize(image, width=500)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -44,7 +49,7 @@ for path, image in images.items():
     rects = detector(gray, 1)
 
     if len(rects) is 0:
-        print("[INFO] No faces found in image {}! Please suppy an image with a detected face. Exiting...".format(path))
+        print("[INFO] No faces found in image {}! Please suppy an image with a detected face. Exiting...".format(os.path.basenam(path)))
         exit()
     else:
         rois = []
@@ -54,7 +59,7 @@ for path, image in images.items():
 
             face_descriptor = recognizer.compute_face_descriptor(image, shape)
             encodings.extend(face_descriptor)
-            print("[INFO] Face descriptor for image {}.".format(path))
+            print("[INFO] Face descriptor for image {}.".format(os.path.basename(path)))
             shape = shape_to_numpy(shape)
 
             (x, y, w, h) = rect_to_bounding(rect)
