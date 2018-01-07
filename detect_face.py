@@ -40,6 +40,7 @@ else:
         #shape = shape_to_numpy(shape)
 
         face_descriptor = recognizer.compute_face_descriptor(image, shape)
+        print("Type of face_descriptor: {}".format(type(face_descriptor)))
         print("Face descriptor: {}".format(face_descriptor))
         shape = shape_to_numpy(shape)
 
