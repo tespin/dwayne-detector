@@ -3,9 +3,10 @@ import numpy as np
 from process import resize
 from process import shape_to_numpy
 from process import rect_to_bounding
-from face_aligner = import FaceAligner
+from face_aligner import FaceAligner
 import dlib
 import cv2
+import os
 
 # TODO: poll video stream
 ap = argparse.ArgumentParser()
