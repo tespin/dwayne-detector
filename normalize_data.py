@@ -42,15 +42,12 @@ for imagePath in imagePaths:
 
         for rect in rects:
             shape = predictor(gray, rect)
-            #shape = shape_to_numpy(shape)
 
             face_descriptor = recognizer.compute_face_descriptor(image, shape)
             print("[INFO]Face descriptor for image{}: {}".format(imagePath, face_descriptor))
             shape = shape_to_numpy(shape)
 
             (x, y, w, h) = rect_to_bounding(rect)
-
-            # TODO: check bounds 
 
             if y < 0:
                 y = 0
