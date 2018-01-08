@@ -27,7 +27,8 @@ aligner = FaceAligner(predictor, desiredFaceWidth=256)
 
 # define dwayne's image
 #imDwayne = cv2.imread(args["dwayne"])
-imDwayne = scipy.misc.imread(args["dwayne"], mode='RGB')
+#imDwayne = scipy.misc.imread(args["dwayne"], mode='RGB')
+imDwayne = cv2.imread(args["dwayne"])
 
 dwayneDetected = detector(imDwayne, 1)
 
@@ -40,7 +41,8 @@ for rect in dwayneDetected:
 # define other image with another detectable face
 #imUnknown = cv2.imread(args["unknown"])
 #imUnknown = scipy.misc.imread(args["unknown"], mode='RGB')
-imUnknown = scipy.misc.imread(args["unknown"], mode='RGB')
+#imUnknown = scipy.misc.imread(args["unknown"], mode='RGB')
+imUnknown = cv2.imread(args["unknown"])
 
 unknownDetected = detector(imUnknown, 1)
 
