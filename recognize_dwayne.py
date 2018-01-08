@@ -39,4 +39,15 @@ for path in images:
     image = resize(image, width=500)
     cv2.imshow("Input {}".format(path), image)
 
+    rects = detector(image, 1)
+    numFaces = len(rects)
+    print("Number of detected faces in image {}: {}.".format(path, numFaces))
+
+    for rect in rects:
+        shape = predictor(image, rect)
+        descriptor = recognizer.compute_face_descriptor(image, shape)
+        #print("Descriptor for image {}: {}".format(path, descriptor))
+        encodings.extend(descriptor)
+
+print(np.linalg.norm(encodings[0] - encodings[1]))
 cv2.waitKey(0)
