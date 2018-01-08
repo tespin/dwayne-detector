@@ -1,6 +1,7 @@
 import argparse
 import math
 import numpy as np
+import scipy.misc
 from process import resize
 from process import shape_to_numpy
 from process import rect_to_bounding
@@ -25,29 +26,36 @@ recognizer = dlib.face_recognition_model_v1(args["recognition_model"])
 aligner = FaceAligner(predictor, desiredFaceWidth=256)
 
 # define dwayne's image
-imDwayne = cv2.imread(args["dwayne"])
+#imDwayne = cv2.imread(args["dwayne"])
+imDwayne = scipy.misc.imread(args["dwayne"], mode='RGB')
+
+dwayneDetected = detector(imDwayne, 1)
+
+for rect in dwayneDetected:
+    dwayneShape = predictor(imDwayne, rect)
+
+    dwayneEncoding = np.array(recognizer.compute_face_descriptor(imDwayne, dwayneShape, num_jitters=1))  
+#    print("Dwayne encoding: {}".format(dwayneEncoding))
 
 # define other image with another detectable face
-imUnknown = cv2.imread(args["unknown"])
+#imUnknown = cv2.imread(args["unknown"])
+#imUnknown = scipy.misc.imread(args["unknown"], mode='RGB')
+imUnknown = scipy.misc.imread(args["unknown"], mode='RGB')
 
-images.extend([args["dwayne"], args["unknown"]])
+unknownDetected = detector(imUnknown, 1)
 
-encodings = []
+for rect in unknownDetected:
+    unknownShape = predictor(imUnknown, rect)
 
-for path in images:
-    image = cv2.imread(path)
-    image = resize(image, width=500)
-    cv2.imshow("Input {}".format(path), image)
+    unknownEncoding = np.array(recognizer.compute_face_descriptor(imUnknown, unknownShape, num_jitters=1))
+#    print("Unknown encoding: {}".format(unknownEncoding))
 
-    rects = detector(image, 1)
-    numFaces = len(rects)
-    print("Number of detected faces in image {}: {}.".format(path, numFaces))
+distance = np.linalg.norm(dwayneEncoding - unknownEncoding)
 
-    for rect in rects:
-        shape = predictor(image, rect)
-        descriptor = recognizer.compute_face_descriptor(image, shape)
-        #print("Descriptor for image {}: {}".format(path, descriptor))
-        encodings.extend(descriptor)
+print("Distance: {}".format(distance))
 
-print(np.linalg.norm(encodings[0] - encodings[1]))
-cv2.waitKey(0)
+if distance < 0.6:
+    print("It's a picture of Dwayne The Rock Johnson!")
+else:
+    print("It's not a picture of The Rock!")
+
