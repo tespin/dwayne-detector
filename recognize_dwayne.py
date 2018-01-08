@@ -1,4 +1,5 @@
 import argparse
+import math
 import numpy as np
 from process import resize
 from process import shape_to_numpy
@@ -23,107 +24,50 @@ predictor = dlib.shape_predictor(args["shape_predictor"])
 recognizer = dlib.face_recognition_model_v1(args["recognition_model"])
 aligner = FaceAligner(predictor, desiredFaceWidth=256)
 
-#imDwaynePath = os.path.basename(args["dwayne"])
-#imUnknownPath = os.path.basename(args["unknown"])
+# define dwayne's image
+imDwayne = cv2.imread(args["dwayne"])
 
-imDwaynePath = str(args["dwayne"])
-imUnknownPath = str(args["unknown"])
+# define other image with another detectable face
+imUnknown = cv2.imread(args["unknown"])
 
-#imDwayne = cv2.imread(args["dwayne"])
-#imUnknown = cv2.imread(args["unknown"])
-#images.extend([imDwayne, imUnknown])
-
-imDwayne = cv2.imread(imDwaynePath)
-imUnknown = cv2.imread(imUnknownPath)
-
-images = {imDwaynePath: imDwayne, imUnknownPath: imUnknown}
+images.extend([imDwayne, imUnknown])
 
 encodings = []
 
-cv2.imshow("Dwayne", imDwayne)
-
-for path, image in images.items():
+# process each face
+for index, image in enumerate(images):
     image = resize(image, width=500)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     rects = detector(gray, 1)
 
     if len(rects) is 0:
-        print("[INFO] No faces found in image {}! Please suppy an image with a detected face. Exiting...".format(os.path.basenam(path)))
+        print("No faces found in this image! Please supply an image with a detected face. Exiting...")
         exit()
+
     else:
         rois = []
 
-        
-
         for rect in rects:
             shape = predictor(gray, rect)
-
             face_descriptor = recognizer.compute_face_descriptor(image, shape)
+            print("Face Descriptor for Image {}: {}".format(index, face_descriptor))
             encodings.extend(face_descriptor)
-#            print("[INFO] Face descriptor for image {}: {}".format(os.path.basename(path), face_descriptor ))
             shape = shape_to_numpy(shape)
 
-            (x, y, w, h) = rect_to_bounding(rect)
+#    for encoding in encodings:
+#        print("Encodings for image {}: {}".format(index, encoding))
 
-            if y < 0:
-                y = 0
-            elif y > y + h:
-                y = y + h
+#vector = encodings[0] - encodings[1]
+#print("Distance: {}".format(distance))
+#print(sqrt(np.dot(encodings[0], encodings[1])))
+#print("Dot product: {}".format(np.dot(vector, vector)))
+#print("Length: {}".format(sqrt(np.dot(vector, vector))))
 
-            if x < 0:
-                x = 0
-            elif x > x + w:
-                x = x + w
+distance = np.linalg.norm(encodings[0] - encodings[1])
+print("Distance: {}".format(distance))
 
-            roi = image[y + 1:y + h, x + 1:x + w]
-#            cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 1)
-            roiAligned = aligner.align(image, gray, rect)
-            roiAligned = resize(roiAligned, width=256)
-            rois.append(roiAligned)
-
-#            for x, y in shape:
-#                cv2.circle(image, (x, y), 1, (0, 0, 255), -1)
-
-            roi = resize(roi, width=256)
-            rois.append(roi)
-
-        print("[INFO] Encoding 1: {}, Encoding 2: {}".format(encodings[0], encodings[1]))
-
-        distance = encodings[0] - encodings[1]
-
-        if distance < 0.6:
-            print("Distance is: {}. Unknown image {} is Dwayne!".format(distance, os.path.basename(path)))
-        else:
-            print("That's not The Rock!")
-
-#        for index, region in enumerate(rois):
-#            cv2.imshow("Face {}".format(index + 1), region)
-
-#cv2.imshow("Dwayne The Rock Johnson", imDwayne)
-#cv2.imshow("Unknown person", imUnknown)
-#cv2.waitKey(0)
-
-#for index, image in enumerate(images):
-#    image = resize(image, width=500)
-#    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-#    
-#    rects = detector(gray, 1)
-#
-#    if len(rects) is 0:
-#        print("[INFO] No faces found in image {}! Skipping...".format(index))
-#        continue
-#    else:
-#        rois = []
-#
-#        for rect in rects:
-#            shape = predictor(gray, rect)
-#
-#            face_descriptor = recognizer.compute_face_descriptor(image, shape)
-#            print("[INFO]Face descriptor for image{}
-#
-# take two images as input
-# detect face
-# align face
-# compute face descriptors
-# calculate Euclidean distance between two input faces (dwayne descriptor and other)
+# compute face_descriptor for dwayne
+# compute face_descriptor for other input
+# subtrct dlib vectors to find euclidean distance
+# if < 0.6, it is dwayne!
