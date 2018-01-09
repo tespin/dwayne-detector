@@ -29,7 +29,7 @@ encodings = []
 for path in paths:
     image = cv2.imread(path)
     image = resize(image, width=500)
-#    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    #gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     rects = detector(image, 1)
 
