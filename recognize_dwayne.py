@@ -18,46 +18,34 @@ ap.add_argument("-p", "--shape-predictor", required=True, help="path to facial l
 ap.add_argument("-r", "--recognition-model", required=True, help="path to facial recognition model")
 args = vars(ap.parse_args())
 
-images = []
-
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(args["shape_predictor"])
 recognizer = dlib.face_recognition_model_v1(args["recognition_model"])
 aligner = FaceAligner(predictor, desiredFaceWidth=256)
 
-# define dwayne's image
-#imDwayne = cv2.imread(args["dwayne"])
-#imDwayne = scipy.misc.imread(args["dwayne"], mode='RGB')
-imDwayne = cv2.imread(args["dwayne"])
+paths = [args["dwayne"], args["unknown"]]
+encodings = []
 
-dwayneDetected = detector(imDwayne, 1)
+for path in paths:
+    image = cv2.imread(path)
+#    image = resize(image, width=500)
+#    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-for rect in dwayneDetected:
-    dwayneShape = predictor(imDwayne, rect)
+    rects = detector(image, 1)
 
-    dwayneEncoding = np.array(recognizer.compute_face_descriptor(imDwayne, dwayneShape, num_jitters=1))  
-#    print("Dwayne encoding: {}".format(dwayneEncoding))
+    for rect in rects:
+        shape = predictor(image, rect)
+        encoding = np.array(recognizer.compute_face_descriptor(image, shape, num_jitters=1))
+        #print("Encoding for face {}: {}".format(os.path.basename(path), encoding))
+#        encodings.extend(encoding)
 
-# define other image with another detectable face
-#imUnknown = cv2.imread(args["unknown"])
-#imUnknown = scipy.misc.imread(args["unknown"], mode='RGB')
-#imUnknown = scipy.misc.imread(args["unknown"], mode='RGB')
-imUnknown = cv2.imread(args["unknown"])
+    encodings.append(encoding)
 
-unknownDetected = detector(imUnknown, 1)
+    print("Encodings size: {}".format(len(encodings)))
 
-for rect in unknownDetected:
-    unknownShape = predictor(imUnknown, rect)
-
-    unknownEncoding = np.array(recognizer.compute_face_descriptor(imUnknown, unknownShape, num_jitters=1))
-#    print("Unknown encoding: {}".format(unknownEncoding))
-
-distance = np.linalg.norm(dwayneEncoding - unknownEncoding)
-
-print("Distance: {}".format(distance))
+distance = np.linalg.norm(encodings[0] - encodings[1])
 
 if distance < 0.6:
-    print("It's a picture of Dwayne The Rock Johnson!")
+    print("It's a picture of Dwayne The Rock Johnson! Distance: {}".format(distance))
 else:
-    print("It's not a picture of The Rock!")
-
+    print("It's not a picture of The Rock! Distance: {}".format(distance))
