@@ -28,7 +28,7 @@ encodings = []
 
 for path in paths:
     image = cv2.imread(path)
-#    image = resize(image, width=500)
+    image = resize(image, width=500)
 #    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     rects = detector(image, 1)
@@ -37,9 +37,8 @@ for path in paths:
         shape = predictor(image, rect)
         encoding = np.array(recognizer.compute_face_descriptor(image, shape, num_jitters=1))
         #print("Encoding for face {}: {}".format(os.path.basename(path), encoding))
-#        encodings.extend(encoding)
+        encodings.append(encoding)
 
-    encodings.append(encoding)
 
     print("Encodings size: {}".format(len(encodings)))
 
