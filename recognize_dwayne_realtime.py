@@ -34,24 +34,29 @@ time.sleep(2.0)
 
 # if no encoding is supplied, compute one with given path "encoding-input"
 if args["load_encoding"] < 0:
+    print("[INFO] Loading image...")
     input = cv2.imread(args["encoding_input"])
     input = resize(input, width=500)
 
     bounds = detector(input, 1)
 
+    print("[INFO] Computing face descriptor...")
     for bound in bounds:
         shape = predictor(input, bound)
         baseline = np.array(recognizer.compute_face_descriptor(input, shape, num_jitters=1))
         encodings.append(baseline)
 elif args["load_encoding"] is 1:
+    print("[INFO] Loading encoding...")
     input = open("baseline.dat", "rb")
     baseline = pickle.load(input)
-    print("Baseline encoding: {}".format(baseline))
+    print("[INFO] Encoding loaded!")
+    encodings.append(baseline)
+    print("Baseline encoding: {}".format(encodings[0]))
 
 # if baseline encoding should be saved
 if args["save_encoding"] > 0:
-    # encodings[0] is saved
-    #dlib.serialize(encodings[0], args["encoding_input"])
     output = open("baseline.dat", "wb")
+    print("[INFO] Dumping contents into baseline.dat.")
     pickle.dump (encodings[0], output)
+    print("[INFO] Contents written!")
     output.close()
