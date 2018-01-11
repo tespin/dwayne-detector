@@ -65,7 +65,7 @@ while True:
     frame = stream.read()
     frame = resize(frame, width=400)
 
-    bounds = detector(frame, 1)
+    bounds = detector(frame, 0)
 
     for bound in bounds:
         shape = predictor(frame, bound)
