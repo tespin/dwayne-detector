@@ -8,9 +8,8 @@ from process import rect_to_bounding
 from face_aligner import FaceAligner
 import dlib
 import cv2
+import pickle
 import os
-
-baseline_encoding = None
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-s", "--save-encoding", type=int, default=-1, help="[OPTIONAL]whether encodings should be saved to disk")
@@ -38,11 +37,14 @@ if args["load_encoding"] < 0:
         baseline = np.array(recognizer.compute_face_descriptor(input, shape, num_jitters=1))
         encodings.append(baseline)
 elif args["load_encoding"] is 1:
-    baseline = dlib.deserialize(args["encoding_input"])
+    input = open("baseline.dat", "rb")
+    baseline = pickle.load(input)
+    print("Baseline encoding: {}".format(baseline))
 
-    
 # if baseline encoding should be saved
 if args["save_encoding"] > 0:
     # encodings[0] is saved
-    dlib.serialize(encodings[0], args["encoding_input"])
-
+    #dlib.serialize(encodings[0], args["encoding_input"])
+    output = open("baseline.dat", "wb")
+    pickle.dump (encodings[0], output)
+    output.close()
