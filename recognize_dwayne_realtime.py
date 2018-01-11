@@ -27,11 +27,6 @@ recognizer = dlib.face_recognition_model_v1(args["recognition_model"])
 
 encodings = []
 
-print("[INFO] Starting stream...")
-stream = VideoStream().start()
-print("[INF0] Warming up...")
-time.sleep(2.0)
-
 # if no encoding is supplied, compute one with given path "encoding-input"
 if args["load_encoding"] < 0:
     print("[INFO] Loading image...")
@@ -60,3 +55,36 @@ if args["save_encoding"] > 0:
     pickle.dump (encodings[0], output)
     print("[INFO] Contents written!")
     output.close()
+
+print("[INFO] Starting stream...")
+stream = VideoStream().start()
+print("[INF0] Warming up...")
+time.sleep(2.0)
+
+while True:
+    frame = stream.read()
+    frame = resize(frame, width=400)
+
+#    bounds = detector(frame, 1)
+
+#    for bound in bounds:
+#        shape = predictor(frame, bound)
+#        encoding = recognizer.compute_face_descriptor(frame, shape, num_jitters=1)
+#        encodings.append(encoding)
+#
+#        shape = shape_to_numpy(shape)
+#
+#        (x, y, w, h) = rect_to_bounding(bound)
+#        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 1)
+#
+#        for x, y in shape:
+#            cv2.circle(frame, (x, y), 1, (0, 0, 255), -1)
+
+    cv2.imshow("Frame", frame)
+    key = cv2.waitKey(1) & 0xFF
+
+    if key == ord ("q"):
+        break
+
+cv2.destroyAllWindows()
+stream.stop()
