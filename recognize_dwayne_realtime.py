@@ -65,20 +65,20 @@ while True:
     frame = stream.read()
     frame = resize(frame, width=400)
 
-#    bounds = detector(frame, 1)
+    bounds = detector(frame, 1)
 
-#    for bound in bounds:
-#        shape = predictor(frame, bound)
-#        encoding = recognizer.compute_face_descriptor(frame, shape, num_jitters=1)
-#        encodings.append(encoding)
-#
-#        shape = shape_to_numpy(shape)
-#
-#        (x, y, w, h) = rect_to_bounding(bound)
-#        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 1)
-#
-#        for x, y in shape:
-#            cv2.circle(frame, (x, y), 1, (0, 0, 255), -1)
+    for bound in bounds:
+        shape = predictor(frame, bound)
+        encoding = recognizer.compute_face_descriptor(frame, shape, num_jitters=1)
+        encodings.append(encoding)
+
+        shape = shape_to_numpy(shape)
+
+        (x, y, w, h) = rect_to_bounding(bound)
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 1)
+
+        for x, y in shape:
+            cv2.circle(frame, (x, y), 1, (0, 0, 255), -1)
 
     cv2.imshow("Frame", frame)
     key = cv2.waitKey(1) & 0xFF
