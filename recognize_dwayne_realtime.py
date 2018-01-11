@@ -69,7 +69,9 @@ while True:
 
     for bound in bounds:
         shape = predictor(frame, bound)
-        encoding = recognizer.compute_face_descriptor(frame, shape, num_jitters=1)
+        encoding = np.array(recognizer.compute_face_descriptor(frame, shape, num_jitters=1))
+
+        # if this face doesn't already match a detected one, add the encoding
         encodings.append(encoding)
 
         shape = shape_to_numpy(shape)
@@ -80,6 +82,7 @@ while True:
         for x, y in shape:
             cv2.circle(frame, (x, y), 1, (0, 0, 255), -1)
 
+    print("Number of encodings: {}".format(len(encodings)))
     cv2.imshow("Frame", frame)
     key = cv2.waitKey(1) & 0xFF
 
