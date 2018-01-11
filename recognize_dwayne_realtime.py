@@ -1,3 +1,4 @@
+from videostream import VideoStream
 import argparse
 import math
 import numpy as np
@@ -10,6 +11,7 @@ import dlib
 import cv2
 import pickle
 import os
+import time
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-s", "--save-encoding", type=int, default=-1, help="[OPTIONAL]whether encodings should be saved to disk")
@@ -25,7 +27,12 @@ recognizer = dlib.face_recognition_model_v1(args["recognition_model"])
 
 encodings = []
 
-# if no encoding is supplied, compute one with given path "encoding"
+print("[INFO] Starting stream...")
+stream = VideoStream().start()
+print("[INF0] Warming up...")
+time.sleep(2.0)
+
+# if no encoding is supplied, compute one with given path "encoding-input"
 if args["load_encoding"] < 0:
     input = cv2.imread(args["encoding_input"])
     input = resize(input, width=500)
