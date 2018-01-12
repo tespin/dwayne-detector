@@ -25,8 +25,6 @@ detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(args["shape_predictor"])
 recognizer = dlib.face_recognition_model_v1(args["recognition_model"])
 
-#encodings = []
-
 # if no encoding is supplied, compute one with given path "encoding-input"
 if args["load_encoding"] < 0:
     print("[INFO] Loading image...")
@@ -39,14 +37,11 @@ if args["load_encoding"] < 0:
     for bound in bounds:
         shape = predictor(input, bound)
         baseline = np.array(recognizer.compute_face_descriptor(input, shape, num_jitters=1))
-#        encodings.append(baseline)
 elif args["load_encoding"] is 1:
     print("[INFO] Loading encoding...")
     input = open("baseline.dat", "rb")
     baseline = pickle.load(input)
     print("[INFO] Encoding loaded!")
-#    encodings.append(baseline)
-#    print("Baseline encoding: {}".format(encodings[0]))
 
 # if baseline encoding should be saved
 if args["save_encoding"] > 0:
