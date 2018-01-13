@@ -68,8 +68,6 @@ while True:
         shape = predictor(frame, bound)
         #encoding = [np.array(recognizer.compute_face_descriptor(frame, shape, num_jitters=1))]
         encodings = [np.array(recognizer.compute_face_descriptor(frame, shape, num_jitters=1))]
-        # if this face doesn't already match a detected one, add the encoding
-        # encodings.append(encoding)
 
         shape = shape_to_numpy(shape)
 
@@ -92,7 +90,7 @@ while True:
         (x, y, w, h) = rect_to_bounding(bound)
         cv2.putText(frame, name, (x + 5, y - 5), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255, 255, 255), 1)
 
-    print("Number of encodings: {}".format(len(encodings)))
+    #print("Number of encodings: {}".format(len(encodings)))
     cv2.imshow("Frame", frame)
     key = cv2.waitKey(1) & 0xFF
 
