@@ -16,7 +16,7 @@ def raw_locations(input, upsample=1):
     return detector(input, upsample)
 
 def face_locations(input, upsample=1):
-    input = resize(input, width=400)
+    #input = resize(input, width=400)
 
     for location in raw_locations(input, upsample):
         return [rect_to_bounding(location)]
