@@ -3,6 +3,7 @@ import numpy as np
 import cv2
 import sys
 import os
+import dlib
 
 FACIAL_LANDMARKS_INDEXES = OrderedDict([
     ("mouth", (48, 68)),
@@ -54,7 +55,16 @@ def shape_to_numpy(shape, dtype="int"):
     for i in range(0, 68):
         coords[i] = (shape.part(i).x, shape.part(i).y)
 
-    return coords
+    return coords 
+
+def shapes_to_numpy(shapes, dtype="int"):
+    coords = np.zeros((68, 2), dtype=dtype)
+
+    for shape in shapes:
+        for i in range(0, 68):
+            coords[i] = (shape.part(i).x, shape.part(i).y)
+
+            return coords
 
 def rect_to_bounding(rect):
     x = rect.left()
@@ -63,3 +73,6 @@ def rect_to_bounding(rect):
     h = rect.bottom() - y
 
     return (x, y, w, h)
+
+def bounding_to_rect(rect):
+    return dlib.rectangle(rect[3], rect[0], rect[1], rect[2])
