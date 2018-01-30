@@ -29,7 +29,12 @@ for (x, y, w, h) in d_locations:
 #        cv2.circle(dwayne, (x, y), 1, (0, 0, 255), -1)
 
 for d_landmark_location in d_landmark_locations:
-    print(d_landmark_location)
+#    print(d_landmark_location)
+    for coords in d_landmark_location:
+#        print(type(coords))
+#       print(coords)
+        (x, y) = (coords[0], coords[1])
+        cv2.circle(dwayne, (x, y), 1, (0, 0, 255), -1)
 
 cv2.imshow("Dwayne", dwayne)
 cv2.waitKey(0)
