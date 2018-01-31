@@ -15,7 +15,8 @@ dwayne = resize(dwayne, width=400)
 
 d_locations = dwayne_detector.face_locations(dwayne)
 d_encodings = dwayne_detector.face_encodings(dwayne, d_locations)
-d_landmarks = dwayne_detector.face_landmarks(dwayne, d_locations)
+d_landmarks = dwayne_detector.face_landmarks(dwayne)
+#d_landmarks = dwayne_detector.face_landmarks(dwayne, d_locations)
 d_shapes = shapes_to_numpy(dwayne_detector.raw_landmarks(dwayne, d_locations))
 
 for (x, y, w, h) in d_locations:
