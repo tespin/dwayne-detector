@@ -19,7 +19,11 @@ unknown = resize(unknown, width=800)
 
 dwayne_encoding = dwayne_detector.face_encodings(dwayne)[0]
 unknown_encoding = dwayne_detector.face_encodings(unknown)[0]
+
+unknown_locations = dwayne_detector.face_locations(unknown)
+unknown_encodings = dwayne_detector.face_encodings(unknown)
 #print(dwayne_encoding)
+print(type(unknown_encodings))
 
 known_encodings = [
     dwayne_encoding
