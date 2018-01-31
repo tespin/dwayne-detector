@@ -25,9 +25,12 @@ known_encodings = [
     dwayne_encoding
 ]
 
-results = dwayne_detector.compare(known_encodings, unknown_encoding)
+#distance = dwayne_detector.face_distance(known_encodings, unknown_encoding)
+#print(distance)
 
-print("Is it Dwayne? {}".format(results[0]))
+results = dwayne_detector.compare(known_encodings, unknown_encoding)
+print(results)
+#print("Is it Dwayne? {}".format(results[0]))
 
 d_locations = dwayne_detector.face_locations(dwayne)
 d_encodings = dwayne_detector.face_encodings(dwayne, d_locations)
