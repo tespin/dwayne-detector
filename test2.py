@@ -11,7 +11,14 @@ ap.add_argument("-d", "--dwayne", required=True, help="path to dwayne")
 args = vars(ap.parse_args())
 
 dwayne = cv2.imread(args["dwayne"])
-dwayne = resize(dwayne, width=400)
+dwayne = resize(dwayne, width=800)
+
+dwayne_encoding = dwayne_detector.face_encodings(dwayne)[0]
+#print(dwayne_encoding)
+
+known_encodings = [
+    dwayne_encoding
+]
 
 d_locations = dwayne_detector.face_locations(dwayne)
 d_encodings = dwayne_detector.face_encodings(dwayne, d_locations)
