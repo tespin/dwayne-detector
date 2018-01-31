@@ -26,16 +26,7 @@ for (x, y, w, h) in d_locations:
 for d_landmark in d_landmarks:
     for coords in d_landmark:
         (x, y) = (coords[0], coords[1])
-        #print(coords)
         cv2.circle(dwayne, (x, y), 1, (0, 0, 255), -1)
-#        print((x, y))
-    #print(type(d_landmark))
-
-#for d_landmark_location in d_landmark_locations:
-#    for coords in d_landmark_location:
-#        (x, y) = coords
-#        cv2.circle(dwayne, (x, y), 1, (0, 0, 255), -1)
-#        print(x, y)
 
 cv2.imshow("Dwayne", dwayne)
 cv2.waitKey(0)
