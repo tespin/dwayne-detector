@@ -45,11 +45,11 @@ def face_encodings(input, locations=None, num_jitters=1):
 
     return [np.array(recognizer.compute_face_descriptor(input, landmark, num_jitters)) for landmark in landmarks]
 
-def face_distance(encodings, input):
-    if len(encodings) == 0:
+def face_distance(known_encodings, unknown_encodings):
+    if len(known_encodings) == 0:
         return np.empty((0))
 
-    return np.linalg.norm(encodings - input)
+    return np.linalg.norm(known_encodings - unknown_encodings)
 
 def compare(known_encoding, unknown_encoding, tolerance=0.6):
-    return list(face_distance(known_encoding, unknown_encoding) <= tolerance)
+    return [face_distance(known_encoding, unknown_encoding) <= tolerance]
