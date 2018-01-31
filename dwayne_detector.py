@@ -34,16 +34,22 @@ def raw_landmarks(input, locations = None):
 
     return [predictor(input, location) for location in locations]
 
+def face_landmarks(input, locations=None):
+    landmarks = raw_landmarks(input, locations)
+    landmark_tuples = [[(part.x, part.y) for part in landmark.parts()] for landmark in landmarks]
+
+    return landmark_tuples
+
 def face_encodings(input, locations=None, num_jitters=1):
     landmarks = raw_landmarks(input, locations)
 
     return [np.array(recognizer.compute_face_descriptor(input, landmark, num_jitters)) for landmark in landmarks]
 
-def face_distance(encodings, face_input):
-    if len(face_encodings) == 0:
+def face_distance(encodings, input):
+    if len(encodings) == 0:
         return np.empty((0))
 
-    return np.linalg.norm(encodings - face_input)
+    return np.linalg.norm(encodings - input)
 
 def compare(known_encoding, unknown_encoding, tolerance=0.6):
-    return list (face_distance(known_encoding, unknown_encoding) <= tolerance)
+    return list(face_distance(known_encoding, unknown_encoding) <= tolerance)
