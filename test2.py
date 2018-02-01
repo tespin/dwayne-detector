@@ -31,19 +31,23 @@ known_encodings = [
 
 for (x, y, w, h), unknown_encoding in zip(unknown_locations, unknown_encodings):
 
-    results = dwayne_detector.compare(dwayne_encoding, unknown_encoding)
+    result = dwayne_detector.compare(dwayne_encoding, unknown_encoding)
+    print(result)
 
     name = "Not Dwayne"
 
-    if True in results:
-        match = results.index(True)
+    if True in result:
+        match = result.index(True)
         name = "Dwayne"
 
     cv2.rectangle(unknown, (x, y), (x + w, y + h), (0, 255, 0), 1)
     cv2.putText(unknown, name, (x + 6, y + h - 6), cv2.FONT_HERSHEY_DUPLEX, 1.0,(255, 255, 255,), 1)
 
-distance = dwayne_detector.face_distance(known_encodings, unknown_encodings)
-print(distance)
+#distance = dwayne_detector.face_distance(known_encodings, unknown_encodings)
+#print(distance)
+
+#results = dwayne_detector.compare(dwayne_encoding, unknown_encodings)
+#print(results)
 
 cv2.imshow("Unknown", unknown)
 cv2.waitKey(0)
