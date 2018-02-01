@@ -49,7 +49,12 @@ def face_distance(known_encodings, unknown_encodings):
     if len(known_encodings) == 0:
         return np.empty((0))
 
+#    return [np.linalg.norm(known_encodings - unknown_encoding) for unknown_encoding in unknown_encodings]
+#    return [np.linalg.norm(known_encodings - unknown_encodings for (known_encodings, unknown_encodings) in zip(known_encodings, unknown_encodings))]
     return np.linalg.norm(known_encodings - unknown_encodings)
 
-def compare(known_encoding, unknown_encoding, tolerance=0.6):
-    return [face_distance(known_encoding, unknown_encoding) <= tolerance]
+def compare(known_encoding, unknown_encodings, tolerance=0.6):
+    #distances = face_distance(known_encoding, unknown_encodings)
+
+    #return [distance <= tolerance for distance in distances]
+    return [face_distance(known_encoding, unknown_encodings) <= tolerance]
