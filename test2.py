@@ -22,8 +22,6 @@ unknown_encoding = dwayne_detector.face_encodings(unknown)[0]
 
 unknown_locations = dwayne_detector.face_locations(unknown)
 unknown_encodings = dwayne_detector.face_encodings(unknown)
-#print(dwayne_encoding)
-#print(type(unknown_encodings))
 
 known_encodings = [
     dwayne_encoding
@@ -44,20 +42,8 @@ for (x, y, w, h), unknown_encoding in zip(unknown_locations, unknown_encodings):
     cv2.rectangle(unknown, (x, y+h), (x + w, y + h+30), (0, 255, 0), cv2.FILLED)
     cv2.putText(unknown, name, (x + 6, y + h + 25), cv2.FONT_HERSHEY_DUPLEX, 1.0,(255, 255, 255,), 1)
 
-#distance = dwayne_detector.face_distance(known_encodings, unknown_encodings)
-#print(distance)
-
-#results = dwayne_detector.compare(dwayne_encoding, unknown_encodings)
-#print(results)
-
 cv2.imshow("Unknown", unknown)
 cv2.waitKey(0)
-
-
-#results = dwayne_detector.compare(dwayne_encoding, unknown_encodings)
-#print(results)
-
-#print("Is it Dwayne? {}".format(results[0]))
 
 #d_locations = dwayne_detector.face_locations(dwayne)
 #d_encodings = dwayne_detector.face_encodings(dwayne, d_locations)
@@ -74,6 +60,3 @@ cv2.waitKey(0)
 #        (x, y) = (coords[0], coords[1])
 #        cv2.circle(dwayne, (x, y), 1, (0, 0, 255), -1)
 
-#cv2.imshow("Dwayne", dwayne)
-#cv2.waitKey(0)
-#capture = cv2.VideoCapture(0)
