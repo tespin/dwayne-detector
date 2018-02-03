@@ -1,9 +1,5 @@
 from collections import OrderedDict
 import numpy as np
-#from process import resize
-#from process import shape_to_numpy
-#from process import rect_to_bounding
-#from process import bounding_to_rect
 import dlib
 import cv2
 
