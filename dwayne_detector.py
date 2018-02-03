@@ -32,6 +32,8 @@ def list_files(basePath, validExtensions=(".jpg", ".jpeg", ".png", ".bmp"), cont
                 imagePath = os.path.join(root, filename).replace(" ", "\\ ")
                 yield imagePath
 
+def list_images(basePath, contains=None):
+    return list_files(basePath, validExtensions=(".jpg", ".jpeg", ".png", ".bmp"), contains=contains)
 
 def rect_to_tuple(rect):
     return rect.top(), rect.right(), rect.bottom(), rect.left()
