@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import numpy as np
 from process import resize
 from process import shape_to_numpy
@@ -6,8 +7,20 @@ from process import bounding_to_rect
 import dlib
 import cv2
 
+FACIAL_LANDMARK_INDEXES = OrderedDict([
+    ("mouth", (48, 68)),
+    ("right_eyebrow", (17, 22)),
+    ("left_eyebrow", (22, 27)),
+    ("right_eye", (36, 42)),
+    ("left_eye", (42, 48)),
+    ("nose", (27, 36)),
+    ("jaw", (0, 17))
+])
+
 detector = dlib.get_frontal_face_detector()
 recognizer = dlib.face_recognition_model_v1("dlib_face_recognition_resnet_model_v1.dat")
+
+
 
 def rect_to_tuple(rect):
     return rect.top(), rect.right(), rect.bottom(), rect.left()
