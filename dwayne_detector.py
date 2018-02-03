@@ -61,6 +61,14 @@ def shape_to_numpy(shape, dtype="int"):
 
     return coords
 
+def shapes_to_numpy(shapes, dtypes="int"):
+    coords = np.zeros((68, 2), dtype=dtype)
+
+    for shape in shapes:
+        for i in range(0, 68):
+            coords[i] = (shape.part(i).x, shape.part(i).y)
+        return [coords]
+
 def rect_to_tuple(rect):
     return rect.top(), rect.right(), rect.bottom(), rect.left()
 
