@@ -1,7 +1,7 @@
 from collections import OrderedDict
 import numpy as np
-from process import resize
-from process import shape_to_numpy
+#from process import resize
+#from process import shape_to_numpy
 from process import rect_to_bounding
 from process import bounding_to_rect
 import dlib
@@ -34,6 +34,32 @@ def list_files(basePath, validExtensions=(".jpg", ".jpeg", ".png", ".bmp"), cont
 
 def list_images(basePath, contains=None):
     return list_files(basePath, validExtensions=(".jpg", ".jpeg", ".png", ".bmp"), contains=contains)
+
+def resize(image, width=None, height=None, interpolation=cv2.INTER_AREA):
+    dim = None
+    (h, w) = image.shape[:2]
+
+    if width is None and height is None:
+        return image
+
+    if width is None:
+        ratio = height / float(h)
+        dimensions = (int(w * ratio), height)
+    else:
+        ratio = width / float(w)
+        dimensions = (width, int(h * ratio))
+
+    resized = cv2.resize(image, dimensions, interpolation=interpolation)
+
+    return resized
+
+def shape_to_numpy(shape, dtype="int"):
+    coords = np.zeros((68, 2), dtype=dtype)
+
+    for i in range(0, 68):
+        coords[i] = (shape.part(i).x, shape.part(i).y)
+
+    return coords
 
 def rect_to_tuple(rect):
     return rect.top(), rect.right(), rect.bottom(), rect.left()
