@@ -3,7 +3,7 @@ import numpy as np
 #from process import resize
 #from process import shape_to_numpy
 #from process import rect_to_bounding
-from process import bounding_to_rect
+#from process import bounding_to_rect
 import dlib
 import cv2
 
@@ -76,6 +76,9 @@ def rect_to_bounding(rect):
     h = rect.bottom() - y
 
     return (x, y, w, h)
+
+def bounding_to_rect(rect):
+    return dlib.rectangle(rect[0], rect[1], rect[2], rect[3])
 
 def rect_to_tuple(rect):
     return rect.top(), rect.right(), rect.bottom(), rect.left()
