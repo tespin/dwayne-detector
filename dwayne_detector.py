@@ -2,7 +2,7 @@ from collections import OrderedDict
 import numpy as np
 #from process import resize
 #from process import shape_to_numpy
-from process import rect_to_bounding
+#from process import rect_to_bounding
 from process import bounding_to_rect
 import dlib
 import cv2
@@ -68,6 +68,14 @@ def shapes_to_numpy(shapes, dtypes="int"):
         for i in range(0, 68):
             coords[i] = (shape.part(i).x, shape.part(i).y)
         return [coords]
+
+def rect_to_bounding(rect):
+    x = rect.left()
+    y = rect.top()
+    w = rect.right() - x
+    h = rect.bottom() - y
+
+    return (x, y, w, h)
 
 def rect_to_tuple(rect):
     return rect.top(), rect.right(), rect.bottom(), rect.left()
