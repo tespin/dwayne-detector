@@ -20,6 +20,17 @@ FACIAL_LANDMARK_INDEXES = OrderedDict([
 detector = dlib.get_frontal_face_detector()
 recognizer = dlib.face_recognition_model_v1("dlib_face_recognition_resnet_model_v1.dat")
 
+def list_files(basePath, validExtensions=(".jpg", ".jpeg", ".png", ".bmp"), contains=None):
+    for (root, directory, filenames) in os.walk(basePath):
+        for filename in filenames:
+            if contains is not None and filename.find(contains) == -1:
+                continue
+
+            extension = filename[filename.rfind("."):].lower()
+
+            if extension.endswith(validExtensions):
+                imagePath = os.path.join(root, filename).replace(" ", "\\ ")
+                yield imagePath
 
 
 def rect_to_tuple(rect):
