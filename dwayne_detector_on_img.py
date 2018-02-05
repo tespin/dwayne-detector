@@ -13,3 +13,7 @@ dwayne = dwayne_detector.resize(dwayne, width=800)
 
 unknown = cv2.imread(args["unknown"])
 unknown = dwayne_detector.resize(unknown, width=800)
+
+dwayne_encoding = dwayne_detector.face_encodings(dwayne)[0]
+unknown_encodings = dwayne_detector.face_encodings(unknown)
+
