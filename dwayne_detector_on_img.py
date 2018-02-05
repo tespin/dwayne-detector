@@ -30,6 +30,7 @@ for (x, y, w, h), unknown_encoding in zip(unknown_locations, unknown_encodings):
 
     cv2.rectangle(unknown, (x, y), (x + w, y + h), (0, 255, 0), 1)
     cv2.rectangle(unknown, (x, y + h), (x + w, y + h + 30), (0, 255, 0), cv2.FILLED)
-    cv2.putText(unknown, name, (x + 6, y + h + 25), cv2.FONT_HERHSEY_DUPLEX, 1.0, (255, 255, 255), 1)
+    cv2.putText(unknown, name, (x + 6, y + h + 25), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255, 255, 255), 1)
 
-
+cv2.imshow("Unknown", unknown)
+cv2.waitKey(0)
