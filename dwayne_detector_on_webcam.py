@@ -9,3 +9,5 @@ args = vars(ap.parse_args())
 
 dwayne = cv2.imread(args["unknown"])
 dwayne = dwayne_detector.resize(dwayne, width=800)
+
+dwayne_encoding = dwayne_detector.face_encodings(dwayne)[0]
