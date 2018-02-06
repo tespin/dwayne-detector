@@ -7,7 +7,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("-d", "--dwayne", required=True, help="path to Dwayne")
 args = vars(ap.parse_args())
 
-dwayne = cv2.imread(args["unknown"])
+dwayne = cv2.imread(args["dwayne"])
 dwayne = dwayne_detector.resize(dwayne, width=800)
 
 dwayne_encoding = dwayne_detector.face_encodings(dwayne)[0]
@@ -30,9 +30,9 @@ while True:
         if True in result:
             name = "Dwayne"
 
-       cv2.rectangle(unknown, (x, y), (x + w, y + h), (0, 255, 0), 1)
-       cv2.rectangle(unknown, (x, y + h), (x + w, y + h + 30), (0, 255, 0), cv2.Filled)       
-       cv2.putText(unknown, name, (x + 6, y + h + 25), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255, 255, 255), 1)
+        cv2.rectangle(unknown, (x, y), (x + w, y + h), (0, 255, 0), 1)
+        cv2.rectangle(unknown, (x, y + h), (x + w, y + h + 30), (0, 255, 0), cv2.Filled)       
+        cv2.putText(unknown, name, (x + 6, y + h + 25), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255, 255, 255), 1)
 
     cv2.imshow("Video", frame)
     key = cvw.waitKey(1) & 0xFF
