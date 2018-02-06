@@ -29,3 +29,6 @@ while True:
 
         if True in result:
             name = "Dwayne"
+
+       cv2.rectangle(unknown, (x, y), (x + w, y + h), (0, 255, 0), 1)
+       
