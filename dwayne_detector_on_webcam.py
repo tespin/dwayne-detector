@@ -20,3 +20,12 @@ while True:
 
     unknown_locations = dwayne_detector.face_locations(unknown)
     unknown_encodings = dwayne_detector.face_encodings(unknown)
+
+    for (x, y, w, h), unknown_encoding in zip(unknown_locations, unknown_encodings):
+        result = dwayne_detector.compare(dwayne_encoding, unknown_encoding)
+        print(result)
+
+        name = "Not Dwayne"
+
+        if True in result:
+            name = "Dwayne"
