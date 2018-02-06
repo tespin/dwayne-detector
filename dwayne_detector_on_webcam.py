@@ -31,4 +31,5 @@ while True:
             name = "Dwayne"
 
        cv2.rectangle(unknown, (x, y), (x + w, y + h), (0, 255, 0), 1)
-       
+       cv2.rectangle(unknown, (x, y + h), (x + w, y + h + 30), (0, 255, 0), cv2.Filled)       
+       cv2.putText(unknown, name, (x + 6, y + h + 25), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255, 255, 255), 1)
