@@ -17,3 +17,5 @@ capture = cv2.VideoCapture(0)
 while True:
     unknown = capture.read()
     unknown = dwayne_detector.resize(unknown, width=800)
+
+    unknown_locations = dwayne_detector.face_locations(unknown)
