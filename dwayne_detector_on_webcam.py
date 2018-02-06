@@ -19,3 +19,4 @@ while True:
     unknown = dwayne_detector.resize(unknown, width=800)
 
     unknown_locations = dwayne_detector.face_locations(unknown)
+    unknown_encodings = dwayne_detector.face_encodings(unknown)
