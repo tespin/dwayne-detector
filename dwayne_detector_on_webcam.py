@@ -23,7 +23,7 @@ while True:
 
     for (x, y, w, h), unknown_encoding in zip(unknown_locations, unknown_encodings):
         result = dwayne_detector.compare(dwayne_encoding, unknown_encoding)
-        print(result)
+        #print(result)
 
         name = "Not Dwayne"
 
