@@ -36,7 +36,7 @@ for (x, y, w, h), unknown_encoding in zip(unknown_locations, unknown_encodings):
     #cv2.putText(unknown, name, (x + 6, y + h + 25), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255, 255, 255), 1)
     for i, line in enumerate(name.split("\n")):
         #cv2.rectangle(unknown, (x, y + h), (x + w, y + h + box_height * (i+1)), (0, 255, 0), cv2.FILLED)
-        cv2.putText(unknown, line, (x + 2, y + h + 25*(i+1)), cv2.FONT_HERSHEY_DUPLEX, 0.85, (255, 255, 255), 1)
+        cv2.putText(unknown, line, (x + 4, y + h + 25*(i+1)), cv2.FONT_HERSHEY_DUPLEX, 0.85, (255, 255, 255), 1)
         print(line)
 
 cv2.imshow("Unknown", unknown)
