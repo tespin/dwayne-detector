@@ -16,7 +16,7 @@ capture = cv2.VideoCapture(0)
 
 while True:
     unknown = capture.read()
-    unknown = dwayne_detector.resize(unknown, width=800)
+#    unknown = dwayne_detector.resize(unknown, width=800)
 
     unknown_locations = dwayne_detector.face_locations(unknown)
     unknown_encodings = dwayne_detector.face_encodings(unknown)
@@ -35,7 +35,7 @@ while True:
         cv2.putText(unknown, name, (x + 6, y + h + 25), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255, 255, 255), 1)
 
     cv2.imshow("Video", frame)
-    key = cvw.waitKey(1) & 0xFF
+    key = cv2.waitKey(1) & 0xFF
 
     if key == ord("q"):
         break
