@@ -15,7 +15,7 @@ dwayne_encoding = dwayne_detector.face_encodings(dwayne)[0]
 capture = cv2.VideoCapture(0)
 
 while True:
-    unknown = capture.read()
+    grabbed, unknown = capture.read()
 #    unknown = dwayne_detector.resize(unknown, width=800)
 
     unknown_locations = dwayne_detector.face_locations(unknown)
@@ -31,10 +31,10 @@ while True:
             name = "Dwayne"
 
         cv2.rectangle(unknown, (x, y), (x + w, y + h), (0, 255, 0), 1)
-        cv2.rectangle(unknown, (x, y + h), (x + w, y + h + 30), (0, 255, 0), cv2.Filled)       
+        cv2.rectangle(unknown, (x, y + h), (x + w, y + h + 30), (0, 255, 0), cv2.FILLED)       
         cv2.putText(unknown, name, (x + 6, y + h + 25), cv2.FONT_HERSHEY_DUPLEX, 1.0, (255, 255, 255), 1)
 
-    cv2.imshow("Video", frame)
+    cv2.imshow("Video", unknown)
     key = cv2.waitKey(1) & 0xFF
 
     if key == ord("q"):
