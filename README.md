@@ -24,6 +24,7 @@ To be populated soon...
 * Dwayne Detector on Webcam is abysmally slow.
 * Clean up files (the only relevant ones are the examples and dwayne_detector.py)
 * Document all methods. 
+* Fix label width / lengths for Not Dwayne labels.
 
 ## Sanity Check
 ![Dwuno](https://github.com/tespin/dwayne-detector/blob/master/documentation/dwuno_mars.png)
