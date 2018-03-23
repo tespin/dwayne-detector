@@ -15,12 +15,15 @@ To be populated soon...
 To be populated soon...
 
 ## Examples
-### Dwayne Detector On Images
+### Dwayne Detector on Images
+
+### Dwayne Detector on Webcam
 
 ## To Do
 * Doesn't seem to work on more than 3 faces.
-* Train a model on Dwayne.
-* Clean up files.
-* Address delayed video.
-* Do Dwayne Detector on video.
-* Fix label height for Not Dwayne.
+* Dwayne Detector on Webcam is abysmally slow.
+* Clean up files (the only relevant ones are the examples and dwayne_detector.py)
+* Document all methods. 
+
+## Sanity Check
+![Dwuno](https://github.com/tespin/dwayne-detector/blob/master/documentation/dwuno_mars.png)
