@@ -2,6 +2,12 @@
 A face recognition app for if you ever want to know whether or not you are Dwayne the Rock Johnson.
 
 
+
+## About
+The Dwayne Detector is a face recognition project that uses face encodings supplied by photos of Dwayne the Rock Johnson as a basis of comparison to other faces. It tells you whether you are Dwayne or not Dwayne. 
+
+The Dwayne Detector uses dlib's Python bindings.
+
 ## To Do
 * Doesn't seem to work on more than 3 faces.
 * Train a model on Dwayne.
