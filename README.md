@@ -8,6 +8,15 @@ The Dwayne Detector is a face recognition project that uses face encodings suppl
 
 The Dwayne Detector uses dlib's Python bindings.
 
+## Requirements
+To be populated soon...
+
+## Use
+To be populated soon...
+
+## Examples
+### Dwayne Detector On Images
+
 ## To Do
 * Doesn't seem to work on more than 3 faces.
 * Train a model on Dwayne.
