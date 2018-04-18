@@ -17,6 +17,15 @@ detector = dlib.get_frontal_face_detector()
 recognizer = dlib.face_recognition_model_v1("dlib_face_recognition_resnet_model_v1.dat")
 
 def list_files(basePath, validExtensions=(".jpg", ".jpeg", ".png", ".bmp"), contains=None):
+    """
+    Given a path to a directory, list all the files in the directory that end with a valid extension.
+
+    :param basePath: string containing path to a directory with images
+    :param validExtensions: tuple containing relevant file extensions
+    :param contains: string used to filter files that don't have what it specified
+    :return: an iterable with paths to the images
+
+    """
     for (root, directory, filenames) in os.walk(basePath):
         for filename in filenames:
             if contains is not None and filename.find(contains) == -1:
