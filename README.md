@@ -22,10 +22,9 @@ To be populated soon...
 ## To Do
 * Doesn't seem to work on more than 3 faces.
 * Dwayne Detector on Webcam is abysmally slow.
-* Clean up files (the only relevant ones are the examples and dwayne_detector.py)
 * Document all methods. 
 * Fix label width / lengths for Not Dwayne labels.
-* Deploy to Heroku (or Flask? Django?) for user prompts.
+* Deploy to Heroku for user prompts.
 
 ## Sanity Check
 ![Dwuno](https://github.com/tespin/dwayne-detector/blob/master/documentation/dwuno_mars.png)
