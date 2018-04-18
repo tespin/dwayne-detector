@@ -24,7 +24,6 @@ def list_files(basePath, validExtensions=(".jpg", ".jpeg", ".png", ".bmp"), cont
     :param validExtensions: tuple containing relevant file extensions
     :param contains: string used to filter files that don't have what it specified
     :return: an iterable with paths to the images
-
     """
     for (root, directory, filenames) in os.walk(basePath):
         for filename in filenames:
@@ -38,6 +37,13 @@ def list_files(basePath, validExtensions=(".jpg", ".jpeg", ".png", ".bmp"), cont
                 yield imagePath
 
 def list_images(basePath, contains=None):
+    """
+    Given a path to a directory, list all the image files that contain what is specified.
+
+    :param basePath: string containing path to a directory with images
+    :param contains: string used to filter files that don't have what is specified
+    :return: generator with image path for each file in directory
+    """
     return list_files(basePath, validExtensions=(".jpg", ".jpeg", ".png", ".bmp"), contains=contains)
 
 def resize(image, width=None, height=None, interpolation=cv2.INTER_AREA):
