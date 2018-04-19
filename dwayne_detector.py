@@ -47,6 +47,17 @@ def list_images(basePath, contains=None):
     return list_files(basePath, validExtensions=(".jpg", ".jpeg", ".png", ".bmp"), contains=contains)
 
 def resize(image, width=None, height=None, interpolation=cv2.INTER_AREA):
+    """
+    Resizes an image given a width or height.
+
+    :param image: a numpy ndarray containing rgb values for an image
+    :param width: int representing desired width to resize to
+    :param height: int representing desired height to resize to
+    :param interpolation: resampling method -- INTER_AREA has good results with image decimation
+
+    """
+
+
     dim = None
     (h, w) = image.shape[:2]
 
