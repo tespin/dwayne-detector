@@ -83,9 +83,8 @@ def shape_to_numpy(shape, dtype="int"):
     :param shape: a dlib full_object_detection containing rects for each detected object
                   and points for its shape
     :param dtype: data type for the array
-
+    :return coords: 68 x 2 array representing the locations of each facial landmark
     """ 
-
 
     coords = np.zeros((68, 2), dtype=dtype)
 
