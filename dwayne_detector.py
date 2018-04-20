@@ -80,7 +80,7 @@ def shape_to_numpy(shape, dtype="int"):
     coords as a matrix with 68 rows and 2 columns to represent the (x, y) coordinates
     of the 68 facial landmarks.
 
-    :param shape: a dlib full_object_detection containing rects for each detected object
+    :param shape: dlib full_object_detection containing rects for each detected object
                   and points for its shape
     :param dtype: data type for the array
     :return coords: 68 x 2 array representing the locations of each facial landmark
