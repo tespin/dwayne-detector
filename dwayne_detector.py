@@ -75,6 +75,18 @@ def resize(image, width=None, height=None, interpolation=cv2.INTER_AREA):
     return resized
 
 def shape_to_numpy(shape, dtype="int"):
+    """
+    Converts a dlib full_object_detection's points into a numpy ndarray. We initialize
+    coords as a matrix with 68 rows and 2 columns to represent the (x, y) coordinates
+    of the 68 facial landmarks.
+
+    :param shape: a dlib full_object_detection containing rects for each detected object
+                  and points for its shape
+    :param dtype: data type for the array
+
+    """ 
+
+
     coords = np.zeros((68, 2), dtype=dtype)
 
     for i in range(0, 68):
