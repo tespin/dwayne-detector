@@ -140,16 +140,19 @@ def bounding_to_rect(rect):
 
 def raw_locations(input, upsample=1):
     """
-    Finds each face in image.
+    Returns list of dlib rect objects of each face in image.
 
     :param input: input image as a numpy array
     :param upsample: number of times to upsample image while looking for faces    
-    :return detector: tuples of found faces
+    :return detector: list of dlib rect objects
     """
 
     return detector(input, upsample)
 
 def face_locations(input, upsample=1):
+    """
+    """
+
     #input = resize(input, width=400)
 
     #for location in raw_locations(input, upsample):
