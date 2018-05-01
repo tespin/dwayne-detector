@@ -101,7 +101,7 @@ def shapes_to_numpy(shapes, dtypes="int"):
 
     :param shapes: list of dlib full_object_detection objects corresponding to each detected face
     :param dtype: data type for the array
-    :return coords: returns list of coords for each facial landmark
+    :return coords: list of coords for each facial landmark
     """
 
     coords = np.zeros((68, 2), dtype=dtype)
@@ -116,6 +116,7 @@ def rect_to_bounding(rect):
     Convert dlib rectangle into a tuple of (x, y, width, height).
 
     :param rect: dlib rectangle representing bounding box of detected faces
+    :return (x, y, w, h): tuple of values representing location and dimension of bounding box
     """
     x = rect.left()
     y = rect.top()
