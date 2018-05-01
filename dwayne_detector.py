@@ -139,6 +139,13 @@ def bounding_to_rect(rect):
 #    return rect.top(), rect.right(), rect.bottom(), rect.left()
 
 def raw_locations(input, upsample=1):
+    """
+    Finds each face in image.
+
+    :param input: input image as a numpy array
+    :param upsample: number of times to upsample image while looking for faces    
+
+    """
     return detector(input, upsample)
 
 def face_locations(input, upsample=1):
