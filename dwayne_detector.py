@@ -144,8 +144,9 @@ def raw_locations(input, upsample=1):
 
     :param input: input image as a numpy array
     :param upsample: number of times to upsample image while looking for faces    
-
+    :return detector: tuples of found faces
     """
+
     return detector(input, upsample)
 
 def face_locations(input, upsample=1):
