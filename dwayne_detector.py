@@ -135,8 +135,8 @@ def bounding_to_rect(rect):
 
     return dlib.rectangle(rect[0], rect[1], rect[2], rect[3])
 
-def rect_to_tuple(rect):
-    return rect.top(), rect.right(), rect.bottom(), rect.left()
+#def rect_to_tuple(rect):
+#    return rect.top(), rect.right(), rect.bottom(), rect.left()
 
 def raw_locations(input, upsample=1):
     return detector(input, upsample)
