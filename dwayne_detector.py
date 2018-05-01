@@ -94,6 +94,16 @@ def shape_to_numpy(shape, dtype="int"):
     return coords
 
 def shapes_to_numpy(shapes, dtypes="int"):
+    """
+    Converts each full_object_detection in the 'shapes' list into a numpy ndarray. 'Coords'
+    is initialized as a (68, 2) matrix to represent the (x, y) coordinates of the 68 
+    facial landmarks.
+
+    :param shapes: list of dlib full_object_detection objects corresponding to each detected face
+    :param dtype: data type for the array
+    :return coords: returns list of coords for each facial landmark
+    """
+
     coords = np.zeros((68, 2), dtype=dtype)
 
     for shape in shapes:
