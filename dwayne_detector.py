@@ -130,6 +130,7 @@ def bounding_to_rect(rect):
     Convert tuple into dlib rectangle.
 
     :param rect: tuple containing values for the bounding box of detected faces
+    :return dlib.rectangle: dlib.rectangle containing values for a bounding box
     """
 
     return dlib.rectangle(rect[0], rect[1], rect[2], rect[3])
