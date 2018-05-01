@@ -112,6 +112,11 @@ def shapes_to_numpy(shapes, dtypes="int"):
         return [coords]
 
 def rect_to_bounding(rect):
+    """
+    Convert dlib rectangle into a tuple of (x, y, width, height).
+
+    :param rect: dlib rectangle representing bounding box of detected faces
+    """
     x = rect.left()
     y = rect.top()
     w = rect.right() - x
