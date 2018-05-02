@@ -218,6 +218,7 @@ def face_distance(known_encodings, unknown_encodings):
 
     :param known_encodings: list of 128-dim face encodings for Dwayne
     :param unknown_encodings: list of 128-dim face encodings for faces found in input image
+    :return: numpy ndarray with distance for each face
     """
 
     if len(known_encodings) == 0:
