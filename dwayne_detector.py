@@ -205,6 +205,7 @@ def face_encodings(input, locations=None, num_jitters=1):
     :param input: input image as a numpy ndarray
     :param locations: dlib rect objects representing detected faces
     :param num_jitters: number of times to re-sample detected faces when calculating encodings
+    :return: list of 128-dim face encodings for each face found in input
     """
 
     landmarks = raw_landmarks(input, locations)
