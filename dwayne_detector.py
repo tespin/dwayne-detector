@@ -185,6 +185,13 @@ def raw_landmarks(input, locations = None):
     return [predictor(input, location) for location in locations]
 
 def face_landmarks(input, locations=None):
+    """
+    Returns list of dictionaries containing (x, y) coords of each face feature.
+
+    :param input: input image as a numpy ndarray
+    :param locations: dlib rect objects representing detected faces
+    """
+
     landmarks = raw_landmarks(input, locations)
     landmark_tuples = [[(part.x, part.y) for part in landmark.parts()] for landmark in landmarks]
 
