@@ -213,6 +213,13 @@ def face_encodings(input, locations=None, num_jitters=1):
     return [np.array(recognizer.compute_face_descriptor(input, landmark, num_jitters)) for landmark in landmarks]
 
 def face_distance(known_encodings, unknown_encodings):
+    """
+    Compares a known encoding to an unknown encoding by calculating Euclidean distance.
+
+    :param known_encodings: list of 128-dim face encodings for Dwayne
+    :param unknown_encodings: list of 128-dim face encodings for faces found in input image
+    """
+
     if len(known_encodings) == 0:
         return np.empty((0))
 
