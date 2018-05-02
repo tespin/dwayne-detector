@@ -199,6 +199,14 @@ def face_landmarks(input, locations=None):
     return landmark_tuples
 
 def face_encodings(input, locations=None, num_jitters=1):
+    """
+    Returns 128-dim face encoding for each detected face.
+
+    :param input: input image as a numpy ndarray
+    :param locations: dlib rect objects representing detected faces
+    :param num_jitters: number of times to re-sample detected faces when calculating encodings
+    """
+
     landmarks = raw_landmarks(input, locations)
 
     return [np.array(recognizer.compute_face_descriptor(input, landmark, num_jitters)) for landmark in landmarks]
