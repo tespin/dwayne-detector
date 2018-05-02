@@ -171,7 +171,7 @@ def raw_landmarks(input, locations = None):
 
     :param input: input image as a numpy ndarray
     :param locations: dlib rect objects representing detected faces
-    
+    :return: list of landmarks for each found face 
     """
 
     if locations is None:
