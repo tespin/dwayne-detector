@@ -101,7 +101,7 @@ def shapes_to_numpy(shapes, dtypes="int"):
 
     :param shapes: list of dlib full_object_detection objects corresponding to each detected face
     :param dtype: data type for the array
-    :return coords: list of coords for each facial landmark
+    :return: list of coords for each facial landmark
     """
 
     coords = np.zeros((68, 2), dtype=dtype)
@@ -116,7 +116,7 @@ def rect_to_bounding(rect):
     Convert dlib rectangle into a tuple of (x, y, width, height).
 
     :param rect: dlib rectangle representing bounding box of detected faces
-    :return (x, y, w, h): tuple of values representing location and dimension of bounding box
+    :return: tuple of values representing location and dimension of bounding box
     """
     x = rect.left()
     y = rect.top()
@@ -130,7 +130,7 @@ def bounding_to_rect(rect):
     Convert tuple into dlib rectangle.
 
     :param rect: tuple containing values for the bounding box of detected faces
-    :return dlib.rectangle: dlib.rectangle containing values for a bounding box
+    :return: dlib.rectangle containing values for a bounding box
     """
 
     return dlib.rectangle(rect[0], rect[1], rect[2], rect[3])
@@ -144,7 +144,7 @@ def raw_locations(input, upsample=1):
 
     :param input: input image as a numpy ndarray
     :param upsample: number of times to upsample image while looking for faces    
-    :return detector: list of dlib rect objects
+    :return: list of dlib rect objects
     """
 
     return detector(input, upsample)
@@ -155,7 +155,7 @@ def face_locations(input, upsample=1):
 
     :param input: input image as a numpy ndarray
     :param upsample: number of times to umsample image while looking for faces
-
+    :return: list of found faces as tuples in (x, y, w, h) order
     """
 
     #input = resize(input, width=400)
