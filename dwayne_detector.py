@@ -214,7 +214,7 @@ def face_encodings(input, locations=None, num_jitters=1):
 
 def face_distance(known_encodings, unknown_encodings):
     """
-    Compares a known encoding to an unknown encoding by calculating Euclidean distance.
+    Calculates Euclidean distance between two encodings.
 
     :param known_encodings: list of 128-dim face encodings for Dwayne
     :param unknown_encodings: list of 128-dim face encodings for faces found in input image
@@ -229,6 +229,14 @@ def face_distance(known_encodings, unknown_encodings):
     return np.linalg.norm(known_encodings - unknown_encodings)
 
 def compare(known_encoding, unknown_encodings, tolerance=0.6):
+    """
+    Compares encodings by determining if each result is above or below a certain tolerance value.
+
+    :param known_encoding: 128-dim face encoding for Dwayne
+    :param unknown_encodings: list of encodings for faces that need to be compared to
+    :param tolerance: distance between faces that can be considered a match
+    """
+
     #distances = face_distance(known_encoding, unknown_encodings)
 
     #return [distance <= tolerance for distance in distances]
