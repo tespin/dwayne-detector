@@ -166,6 +166,14 @@ def face_locations(input, upsample=1):
     return [rect_to_bounding(location) for location in raw_locations(input, upsample)]
 
 def raw_landmarks(input, locations = None):
+    """
+    Returns list of 68 landmarks per detected face.
+
+    :param input: input image as a numpy ndarray
+    :param locations: dlib rect objects representing detected faces
+    
+    """
+
     if locations is None:
         locations = raw_locations(input)
     else:
