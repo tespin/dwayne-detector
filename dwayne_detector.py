@@ -190,6 +190,7 @@ def face_landmarks(input, locations=None):
 
     :param input: input image as a numpy ndarray
     :param locations: dlib rect objects representing detected faces
+    :return landmark_tuples: list of dictionaries with coords for each facial landmark
     """
 
     landmarks = raw_landmarks(input, locations)
