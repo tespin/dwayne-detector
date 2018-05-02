@@ -235,6 +235,7 @@ def compare(known_encoding, unknown_encodings, tolerance=0.6):
     :param known_encoding: 128-dim face encoding for Dwayne
     :param unknown_encodings: list of encodings for faces that need to be compared to
     :param tolerance: distance between faces that can be considered a match
+    :return: list of true / false values for whether or not each found face is Dwayne's face
     """
 
     #distances = face_distance(known_encoding, unknown_encodings)
