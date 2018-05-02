@@ -142,7 +142,7 @@ def raw_locations(input, upsample=1):
     """
     Returns list of dlib rect objects of each face in image.
 
-    :param input: input image as a numpy array
+    :param input: input image as a numpy ndarray
     :param upsample: number of times to upsample image while looking for faces    
     :return detector: list of dlib rect objects
     """
@@ -151,6 +151,11 @@ def raw_locations(input, upsample=1):
 
 def face_locations(input, upsample=1):
     """
+    Returns list of found faces as tuples.
+
+    :param input: input image as a numpy ndarray
+    :param upsample: number of times to umsample image while looking for faces
+
     """
 
     #input = resize(input, width=400)
